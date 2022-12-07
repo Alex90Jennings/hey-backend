@@ -33,4 +33,14 @@ export class UsersController {
         favouriteAnimal: ${createUserDto.favouriteAnimal}
         `;
   }
+
+  @Delete('id')
+  delete(@Param('id') id): string {
+    return `Delete ${id}`;
+  }
+
+  @Put('id')
+  update(@Body() updateUserDto: createUserDto, @Param('id') id): string {
+    return `Update ${id} - email: ${updateUserDto.email}`;
+  }
 }
