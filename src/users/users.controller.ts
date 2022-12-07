@@ -15,12 +15,12 @@ import { User } from './interfaces/user.interface';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  findAll(): User[] {
+  async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): User {
+  async findOne(@Param('id') id): Promise<User> {
     return this.usersService.findOne(id);
   }
 
