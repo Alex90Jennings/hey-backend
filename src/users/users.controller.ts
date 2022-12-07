@@ -17,20 +17,20 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param() param): string {
-    return `User ${param.id}`;
+  findOne(@Param('id') id): string {
+    return `User ${id}`;
   }
 
   @Post()
   create(@Body() createUserDto: createUserDto): string {
     return `
-            firstName: ${createUserDto.firstName}
-            lastName: ${createUserDto.lastName}
-            email: ${createUserDto.email}
-            interests: ${createUserDto.interests}
-            grewUpIn: ${createUserDto.grewUpIn}
-            currentlyLiveIn: ${createUserDto.currentlyLiveIn}
-            favouriteAnimal: ${createUserDto.favouriteAnimal}
-            `;
+        firstName: ${createUserDto.firstName}
+        lastName: ${createUserDto.lastName}
+        email: ${createUserDto.email}
+        interests: ${createUserDto.interests}
+        grewUpIn: ${createUserDto.grewUpIn}
+        currentlyLiveIn: ${createUserDto.currentlyLiveIn}
+        favouriteAnimal: ${createUserDto.favouriteAnimal}
+        `;
   }
 }
