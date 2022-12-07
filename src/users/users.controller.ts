@@ -15,12 +15,12 @@ import { User } from './interfaces/user.interface';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  async findAll(): Promise<User[]> {
+  findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id): Promise<User> {
+  findOne(@Param('id') id): Promise<User> {
     return this.usersService.findOne(id);
   }
 
@@ -30,12 +30,12 @@ export class UsersController {
   }
 
   @Delete('id')
-  delete(@Param('id') id): string {
-    return `Delete ${id}`;
+  delete(@Param('id') id): Promise<User> {
+    return this.usersService.delete(id);
   }
 
   @Put('id')
-  update(@Body() updateUserDto: createUserDto, @Param('id') id): string {
-    return `Update ${id} - email: ${updateUserDto.email}`;
+  update(@Body() updateUserDto: createUserDto, @Param('id') id): Promise<User> {
+    return this.usersService.update(id, updateUserDto);
   }
 }

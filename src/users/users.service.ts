@@ -19,24 +19,12 @@ export class UsersService {
     const newUser = new this.userModel(user);
     return await newUser.save();
   }
-}
 
-// id: '1',
-// firstName: 'Rina',
-// lastName: 'Dog',
-// email: 'rina@dog.com',
-// interests: ['digging', 'eating'],
-// grewUpIn: 'Italy',
-// currentlyLiveIn: 'UK',
-// favouriteAnimal: 'squirrel',
-// },
-// {
-// id: '2',
-// firstName: 'Alex',
-// lastName: 'Jennings',
-// email: 'alex@dog.com',
-// interests: ['coding', 'eating'],
-// grewUpIn: 'UK',
-// currentlyLiveIn: 'UK',
-// favouriteAnimal: 'wolf',
-// },
+  async delete(id: string): Promise<User> {
+    return await this.userModel.findByIdAndRemove(id);
+  }
+
+  async update(id: string, user: User): Promise<User> {
+    return await this.userModel.findByIdAndUpdate(id, user, { new: true });
+  }
+}
