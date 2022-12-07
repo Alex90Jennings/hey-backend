@@ -5,5 +5,5 @@ export class createUserDto {
   readonly interests: string[];
   readonly grewUpIn: string;
   readonly currentlyLiveIn: string;
-  readonly favouriteAnimale: string;
+  readonly favouriteAnimal: string;
 }
