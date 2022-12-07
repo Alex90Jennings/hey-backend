@@ -25,16 +25,8 @@ export class UsersController {
   }
 
   @Post()
-  create(@Body() createUserDto: createUserDto): string {
-    return `
-        firstName: ${createUserDto.firstName}
-        lastName: ${createUserDto.lastName}
-        email: ${createUserDto.email}
-        interests: ${createUserDto.interests}
-        grewUpIn: ${createUserDto.grewUpIn}
-        currentlyLiveIn: ${createUserDto.currentlyLiveIn}
-        favouriteAnimal: ${createUserDto.favouriteAnimal}
-        `;
+  create(@Body() createUserDto: createUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
   }
 
   @Delete('id')
