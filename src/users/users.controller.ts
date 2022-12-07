@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { createUserDto } from './dto/create-user.dto';
 
 @Controller('users')
@@ -6,6 +14,11 @@ export class UsersController {
   @Get()
   findAll(): string {
     return 'Get all users';
+  }
+
+  @Get(':id')
+  findOne(@Param() param): string {
+    return `User ${param.id}`;
   }
 
   @Post()
