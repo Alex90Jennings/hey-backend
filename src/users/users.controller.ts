@@ -8,12 +8,15 @@ import {
   Param,
 } from '@nestjs/common';
 import { createUserDto } from './dto/create-user.dto';
+import { UsersService } from './users.service';
+import { User } from './interfaces/user.interface';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
   @Get()
-  findAll(): string {
-    return 'Get all users';
+  findAll(): User[] {
+    return this.usersService.findAll();
   }
 
   @Get(':id')

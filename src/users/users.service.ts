@@ -5,7 +5,7 @@ import { User } from './interfaces/user.interface';
 export class UsersService {
   private readonly users: User[] = [
     {
-      id: '1010010110923',
+      id: '1',
       firstName: 'Rina',
       lastName: 'Dog',
       email: 'rina@dog.com',
@@ -15,7 +15,7 @@ export class UsersService {
       favouriteAnimal: 'squirrel',
     },
     {
-      id: '1010010110925',
+      id: '2',
       firstName: 'Alex',
       lastName: 'Jennings',
       email: 'alex@dog.com',
@@ -25,4 +25,8 @@ export class UsersService {
       favouriteAnimal: 'wolf',
     },
   ];
+
+  findAll(): User[] {
+    return this.users;
+  }
 }
