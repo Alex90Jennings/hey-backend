@@ -29,12 +29,12 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Delete('id')
+  @Delete(':id')
   delete(@Param('id') id): Promise<User> {
     return this.usersService.delete(id);
   }
 
-  @Put('id')
+  @Put(':id')
   update(@Body() updateUserDto: createUserDto, @Param('id') id): Promise<User> {
     return this.usersService.update(id, updateUserDto);
   }
