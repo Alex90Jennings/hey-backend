@@ -29,4 +29,8 @@ export class UsersService {
   findAll(): User[] {
     return this.users;
   }
+
+  findOne(id: string): User {
+    return this.users.find((user) => user.id === id);
+  }
 }
