@@ -1,39 +1,50 @@
-version: '3.7'
-
+version: '3.3'
 services:
-  main:
-    container_name: main
+  dev:
+    container_name: nestjs_api_dev
+    image: nestjs-api-dev:1.0.0
     build:
       context: .
+      dockerfile: ./Dockerfile
       target: development
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
     ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
-      - 9229:9229
-    command: npm run start:dev
-    env_file:
-      - .env
+      - 3000:3000
     networks:
-      - webnet
+      - nesjs-network
     depends_on:
-      - mongo
-  mongo:
-    container_name: postgres
-    image: postgres:12
-    networks:
-      - webnet
-    environment:
-      MONGO_PASSWORD: ${DB_PASSWORD}
-      MONGO_USER: ${DB_USERNAME}
-      MONGO_DB: ${DB_DATABASE_NAME}
-      PG_DATA: /var/lib/mongo/data
-    ports:
-      - 5432:5432
+      - mongodb
     volumes:
-      - pgdata:/var/lib/mongo/data
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
+  mongodb:
+    image : mongo:latest
+    container_name: mongodb
+    volumes:
+      - ./database:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - nesjs-network
+    restart: always
+  prod:
+    container_name: nestjs_api_prod
+    image: nestjs-api-prod:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - nesjs-network
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
 networks:
-  webnet:
-volumes:
-  pgdata:
+    nesjs-network:
+      driver: bridge
